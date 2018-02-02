@@ -30,14 +30,13 @@ int main(int argc, char *argv[],char * envp[])
     char arg[BUFFER_LEN] = { 0 };
 
     getcwd(cwd, sizeof(cwd));
-    printf("****I WILL SHELL YOU DE VEY****\n");
+    // printf("\t\t****I WILL SHELL YOU DE VEY****\n");
     printf("%s:", cwd);
     // Parse the commands provided using argc and argv
 
     // Perform an infinite loop getting command input from users
     while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
     {
-        printf("%s:", cwd);
         // Perform string tokenization to get the command and argument
         char *token = strtok(buffer, " \n");
         int i = 0;
@@ -89,7 +88,6 @@ int main(int argc, char *argv[],char * envp[])
             Show_Environ(envp);
         }
         else if (strcmp(command, "echo") == 0){
-          printf("%s\n", command);
           printf("%s\n", arg);
             // printf("Display <comment> on the display followed by a newline");
         }
@@ -101,6 +99,7 @@ int main(int argc, char *argv[],char * envp[])
         {
             fputs("Unsupported command, use help to display the manual\n", stderr);
         }
+        printf("%s:", cwd);
     }
     return EXIT_SUCCESS;
 }
