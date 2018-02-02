@@ -3,7 +3,7 @@
  *
  * Copyright (C) 2017, <GROUP MEMBERS>
  * All rights reserved.
- * 
+ *
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,3 +15,22 @@
 
 // Define your utility functions here, these will most likely be functions that you call
 // in your myshell.c source file
+
+
+void display_help(void){
+  FILE *fp;
+  int c;
+  fp = fopen("README.md", "r+");
+  while ((c = getc(fp)) != EOF)
+  {
+      putchar(c);
+  }
+  printf("\n");
+  fclose(fp);
+}
+
+void change_directory(void){
+  getcwd(cwd, sizeof(cwd));
+  printf("cwd: %s\n", cwd);
+  printf("arg: %s\n", arg);
+}
