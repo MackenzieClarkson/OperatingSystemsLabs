@@ -66,7 +66,15 @@ int main(int argc, char *argv[])
         // other commands here...
         else if (strcmp(command, "help") == 0)
         {
-            
+            FILE *fp;
+            int c;
+            fp = fopen("README.md", "r+");
+            while ((c = getc(fp)) != EOF)
+            {
+                putchar(c);
+            }
+            printf("\n");
+            fclose(fp);
         }
         // quit command -- exit the shell
         else if (strcmp(command, "quit") == 0)
