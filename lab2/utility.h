@@ -11,8 +11,9 @@
 // Include your relevant functions declarations here they must start with the
 // extern keyword such as in the following example:
 extern void display_help(void);
-extern void change_directory(void);
+// extern void change_directory(char arg[]);
 extern void Show_Environ( char * envp[]);
 extern void clearScreen(void);
+extern int print_directory(void);
 
 #endif /* UTILITY_H_ */

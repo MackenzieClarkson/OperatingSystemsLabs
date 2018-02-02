@@ -15,7 +15,18 @@
 
 // Define your utility functions here, these will most likely be functions that you call
 // in your myshell.c source file
-
+int print_directory(void) {
+  DIR *d;
+  struct dirent *dir;
+  d = opendir(".");
+  if (d) {
+    while ((dir = readdir(d)) != NULL) {
+      printf("%s\n", dir->d_name);
+    }
+    closedir(d);
+  }
+  return(0);
+}
 
 void display_help(void){
   FILE *fp;
