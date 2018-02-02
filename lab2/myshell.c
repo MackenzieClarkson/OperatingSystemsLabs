@@ -3,7 +3,7 @@
  *
  * Copyright (C) 2017, <GROUP MEMBERS>
  * All rights reserved.
- * 
+ *
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,14 +22,15 @@ char cwd[BUFFER_LEN];
 
 // Define functions declared in myshell.h here
 
-int main(int argc, char *argv[])
+int main(int argc, char *argv[],char * envp[])
 {
     // Input buffer and and commands
     char buffer[BUFFER_LEN] = { 0 };
     char command[BUFFER_LEN] = { 0 };
     char arg[BUFFER_LEN] = { 0 };
-    
+
     getcwd(cwd, sizeof(cwd));
+    printf("****I WILL SHELL YOU DE VEY****\n");
     printf("%s:", cwd);
     // Parse the commands provided using argc and argv
 
@@ -38,10 +39,11 @@ int main(int argc, char *argv[])
     {
         printf("%s:", cwd);
         // Perform string tokenization to get the command and argument
-        char *token = strtok(buffer, " ");
+        char *token = strtok(buffer, " \n");
         int i = 0;
         while(token)
         {
+
             if (i == 0)
             {
                 strcpy(command, token);
@@ -50,7 +52,7 @@ int main(int argc, char *argv[])
             {
                 strcpy(arg, token);
             }
-            token = strtok(NULL, " ");
+            token = strtok(NULL, " \n");
             i++;
         }
         // Check the command and execute the operations for each command
@@ -59,29 +61,41 @@ int main(int argc, char *argv[])
         {
             // your code here
             getcwd(cwd, sizeof(cwd));
-            printf("cwd: %s\n", cwd);
-            printf("arg: %s\n", arg);
+            char *path = arg;
+            // strcpy(path, cwd);
+            // strcat(path, arg);
+            chdir(path);
+            getcwd(cwd, sizeof(cwd));
+
         }
 
         // other commands here...
         else if (strcmp(command, "help") == 0)
         {
-            FILE *fp;
-            int c;
-            fp = fopen("README.md", "r+");
-            while ((c = getc(fp)) != EOF)
-            {
-                putchar(c);
-            }
-            printf("\n");
-            fclose(fp);
+            display_help();
         }
         // quit command -- exit the shell
         else if (strcmp(command, "quit") == 0)
         {
             return EXIT_SUCCESS;
         }
-
+        else if (strcmp(command, "clr") == 0){
+            clearScreen();
+        }
+        else if (strcmp(command, "dir") == 0){
+            printf("list the contents of directory <directory>");
+        }
+        else if (strcmp(command, "environ") == 0){
+            Show_Environ(envp);
+        }
+        else if (strcmp(command, "echo") == 0){
+          printf("%s\n", command);
+          printf("%s\n", arg);
+            // printf("Display <comment> on the display followed by a newline");
+        }
+        else if (strcmp(command, "pause") == 0){
+            printf("Pause operation of the shell until 'Enter' is pressed");
+        }
         // Unsupported command
         else
         {

@@ -12,5 +12,7 @@
 // extern keyword such as in the following example:
 extern void display_help(void);
 extern void change_directory(void);
+extern void Show_Environ( char * envp[]);
+extern void clearScreen(void);
 
 #endif /* UTILITY_H_ */

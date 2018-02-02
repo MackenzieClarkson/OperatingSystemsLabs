@@ -28,9 +28,20 @@ void display_help(void){
   printf("\n");
   fclose(fp);
 }
+void Show_Environ(char * envp[])
+{
+    int i;
 
-void change_directory(void){
-  getcwd(cwd, sizeof(cwd));
-  printf("cwd: %s\n", cwd);
-  printf("arg: %s\n", arg);
+    for (i = 0; envp[i] != NULL; i++)
+    {
+        printf("\n%s", envp[i]);
+    }
 }
+void clearScreen(void)
+{
+  const char *CLEAR_SCREEN_ANSI = "\e[1;1H\e[2J";
+  write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 12);
+}
+// void change_directory(void){
+//   getcwd(cwd, sizeof(cwd));
+// }
